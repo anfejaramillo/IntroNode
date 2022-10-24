@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Test Request</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <!-- <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        .contenedor{
+            border: 2px solid red;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function actualizarContenido(){
+            let requestConfig = {
+                url: "https://catfact.ninja/fact"
+            }
+            let requestPromise = axios("https://catfact.ninja/fact");
+            requestPromise.then(function(response){
+                let element = document.getElementById("main_container");
+                element.innerHTML = `<h4>Hecho de los Gatos</h4>
+                <div>${response.data.fact}</div>
+                <div class="contenedor">La longitud del hecho es: ${response.data.length}</div>
+                `;
+            }).catch(function(err){
+                console.log(err)
+            });
+        }
+    </script>
+</head>
+<body>
+    <h2>Ejemplo request</h2>
+    <div class="contenedor" id="frame_container">
+        <h4>Contenedor Principal</h4>
+        <div id="main_container" class="contenedor">Esta Vacio</div>
+    </div>
+    <input type="button" value="Actualizar contenido" onclick="actualizarContenido()"/>
+    <script>
+        let element = document.getElementById("frame_container");
+        let nowDate = new Date();
+        let elementCreated = document.createElement("h4");
+        elementCreated.innerHTML = nowDate.toString();
+        element.appendChild(elementCreated);
+    </script>
+</body>
+</html>
